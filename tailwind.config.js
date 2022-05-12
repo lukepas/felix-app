@@ -1,9 +1,14 @@
 module.exports = {
     content: [
-        './src/**/*.{js,jsx,ts,tsx}',
+        './src/pages/**/*.{js,jsx,ts,tsx}',
+        './src/components/**/*.{js,jsx,ts,tsx}',
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                'black-rgba': 'rgba(0, 0, 0, 0.5)',
+            },
+        },
     },
     plugins: [],
 };

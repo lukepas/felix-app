@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes as RouterRoutes, Route as RouterRoute } from 'react-router-dom';
 import { ROUTES } from './constants/routes';
+import './index.css';
 
 export default function App() {
     return (

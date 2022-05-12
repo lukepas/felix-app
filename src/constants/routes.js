@@ -1,6 +1,6 @@
 import React from 'react';
-import Home from '../pages/home';
-import NotFound from '../pages/notFound';
+import Home from '../pages/home/home';
+import NotFound from '../pages/notFound/notFound';
 
 export const ROUTE_NAMES = {
     NOT_FOUND: '*',

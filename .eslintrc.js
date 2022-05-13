@@ -36,7 +36,7 @@ module.exports = {
         'no-alert': 0,
         'no-undef': 0,
         'no-use-before-define': 0,
-        'no-console': 2,
+        'no-console': 1,
         'no-shadow': 1,
         'array-callback-return': 0,
         'no-await-in-loop': 1,

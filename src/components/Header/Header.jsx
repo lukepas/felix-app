@@ -13,7 +13,9 @@ export default function Header() {
                 </Link>
             </div>
             <div className="m-4">
-                <Button text={BUTTON_TEXT.LOGIN} />
+                <Link to={ROUTE_REDERECT.LOGIN}>
+                    <Button text={BUTTON_TEXT.LOGIN} />
+                </Link>
             </div>
         </header>
     );

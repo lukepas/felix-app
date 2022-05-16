@@ -6,8 +6,8 @@ import { BUTTON_TEXT } from '../../constants/button';
 
 export default function MovieCard({ title, description, image }) {
     return (
-        <div className="bg-zinc-800 w-80">
-            <div className="h-96">
+        <div className="bg-zinc-800 h-96 w-64">
+            <div className="h-1/2">
                 <img
                     className="h-full w-full object-cover"
                     src={image}

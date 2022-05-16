@@ -1,7 +1,6 @@
-# Getting Started with Felix app
+# Getting Started with Felix app 
 
-This project was created for practise as Netflix clone app.
-Bootstraped with React, Tailwind and Redux.
+This project (Netflix clone app) was created as a practise with React, Tailwind and Redux.
 
 ## `npm start`
 

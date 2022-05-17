@@ -1,54 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
 import MovieCard from '../MovieCard/MovieCard';
+import movieRepository from '../../repositories/movie';
 import { BUTTON_TEXT } from '../../constants/button';
+import { ROUTE_REDERECT } from '../../constants/routeNames';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 export default function MovieList() {
-    // const [movies, setMovies] = useState([]);
+    const [movies, setMovies] = useState([]);
+    const [isLoading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+    const navigate = useNavigate();
 
-    // const getMovieList = async () => {
-    //     const response = await movieRepository.getAll;
-    //     setMovies(response);
-    // };
+    if (isLoading) {
+        return (
+            <div className="min-h-[50vh] flex items-center justify-center">
+                <LoadingSpinner />
+            </div>
+        );
+    }
 
-    // useEffect(() => {
-    //     getMovieList();
-    // }, []);
+    const getMovieList = () => {
+        try {
+            const response = movieRepository.getAll;
+            setMovies(response);
+        } catch (err) {
+            if (!err.ok) {
+                setError(true);
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
 
-    const movies = [
-        {
-            title: 'Avengers: Endgame',
-            image: 'https://image.tmdb.org/t/p/original/or06FN3Dka5tukK1e9sl16pB3iy.jpg',
-            description: "After the devastating events of Avengers: Infinity War, the universe is in ruins due to the efforts of the Mad Titan, Thanos. With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos' actions and restore order to the universe once and for all, no matter what consequences may be in store.",
-            id: 'cbcd32-Avengers:-4f12eb',
-            video: 'https://www.youtube.com/embed/TcMBFSGVi1c',
-            free: true,
-        },
-        {
-            title: 'Incredibles 2',
-            image: 'https://image.tmdb.org/t/p/original/9lFKBtaVIhP7E2Pk0IY1CwTKTMZ.jpg',
-            description: 'Elastigirl springs into action to save the day, while Mr. Incredible faces his greatest challenge yet – taking care of the problems of his three children.',
-            id: 'af888b-Incredibles-0f6258',
-            video: 'https://www.youtube.com/embed/i5qOzqD9Rms',
-            free: true,
-        },
-        {
-            title: 'Avengers: Endgame',
-            image: 'https://image.tmdb.org/t/p/original/or06FN3Dka5tukK1e9sl16pB3iy.jpg',
-            description: "After the devastating events of Avengers: Infinity War, the universe is in ruins due to the efforts of the Mad Titan, Thanos. With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos' actions and restore order to the universe once and for all, no matter what consequences may be in store.",
-            id: 'cbcd32-Avengers:-4f12eb',
-            video: 'https://www.youtube.com/embed/TcMBFSGVi1c',
-            free: true,
-        },
-        {
-            title: 'Incredibles 2',
-            image: 'https://image.tmdb.org/t/p/original/9lFKBtaVIhP7E2Pk0IY1CwTKTMZ.jpg',
-            description: 'Elastigirl springs into action to save the day, while Mr. Incredible faces his greatest challenge yet – taking care of the problems of his three children.',
-            id: 'af888b-Incredibles-0f6258',
-            video: 'https://www.youtube.com/embed/i5qOzqD9Rms',
-            free: true,
-        },
-    ];
+    if (error) {
+        navigate(ROUTE_REDERECT.LOGIN);
+    }
+
+    useEffect(() => {
+        getMovieList();
+    }, []);
 
     return (
         <>

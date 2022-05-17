@@ -1,7 +1,8 @@
 import React from 'react';
-import Home from '../pages/home/home';
-import NotFound from '../pages/notFound/notFound';
-import Login from '../pages/login/Login';
+import Home from '../pages/Home/Home';
+import NotFound from '../pages/NotFound/NotFound';
+import Login from '../pages/Login/Login';
+import SingleMovie from '../pages/SingleMovie/SingleMovie';
 import { ROUTE_NAMES } from './routeNames';
 
 export const ROUTES = [
@@ -19,5 +20,10 @@ export const ROUTES = [
         path: ROUTE_NAMES.LOGIN,
         component: <Login />,
         exact: true,
+    },
+    {
+        path: ROUTE_NAMES.SINGLE_MOVIE,
+        component: <SingleMovie />,
+        exact: false,
     },
 ];

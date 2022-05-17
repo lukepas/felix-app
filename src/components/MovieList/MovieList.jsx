@@ -59,6 +59,7 @@ export default function MovieList() {
                         title={movie.title}
                         image={movie.image}
                         description={movie.description}
+                        id={movie.id}
                     />
                 ))}
             </div>

@@ -6,4 +6,5 @@ export const BUTTON_TEXT = {
     GET_ACCESS: 'Get access',
     GET_MORE_CONTENT: 'Get More Content',
     WATCH: 'Watch ▶',
+    GET_STARTED: 'Get started >',
 };

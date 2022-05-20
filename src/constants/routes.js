@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from '../pages/Home/Home';
+import Landing from '../pages/Landing/Landing';
 import NotFound from '../pages/NotFound/NotFound';
 import Login from '../pages/Login/Login';
 import SingleMovie from '../pages/SingleMovie/SingleMovie';
@@ -8,7 +8,7 @@ import { ROUTE_NAMES } from './routeNames';
 export const ROUTES = [
     {
         path: ROUTE_NAMES.DEFAULT,
-        component: <Home />,
+        component: <Landing />,
         exact: true,
     },
     {

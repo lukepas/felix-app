@@ -1,10 +1,10 @@
-async function getAll() {
-    const response = await fetch('https://academy-video-api.herokuapp.com/content/items');
+async function getAll(authToken) {
+    const response = await fetch('https://academy-video-api.herokuapp.com/content/items', { token: authToken });
     return response;
 }
 
-async function getById(id) {
-    const response = await fetch(`https://academy-video-api.herokuapp.com/content/items/${id}`);
+async function getById(id, authToken) {
+    const response = await fetch(`https://academy-video-api.herokuapp.com/content/items/${id}`, { token: authToken });
     return response;
 }
 

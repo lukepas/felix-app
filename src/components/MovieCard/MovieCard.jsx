@@ -21,8 +21,8 @@ export default function MovieCard({
             </Link>
             <div>
                 <Link to={`${ROUTE_REDERECT.SINGLE_MOVIE}${id}`}>
-                    <h4 className="text-white text-center font-medium text-xl my-2">{title}</h4>
-                    <p className="text-white mx-2 text-center text-sm">{description}</p>
+                    <h4 className="text-white mx-2 text-left font-medium text-xl my-2">{title}</h4>
+                    <p className="text-white mx-2 text-left text-sm">{description}</p>
                 </Link>
             </div>
             <div className="text-center my-4">

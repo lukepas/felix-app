@@ -3,13 +3,15 @@ import Button from '../Button/Button';
 import MovieCard from '../MovieCard/MovieCard';
 import movieRepository from '../../repositories/movie';
 import textServices from '../../services/text';
+import localStorageItems from '../../constants/localStorageItems';
 import { BUTTON_TEXT } from '../../constants/button';
 
 export default function MovieList() {
     const [movies, setMovies] = useState([]);
+    const authToken = localStorage.getItem(localStorageItems.authToken);
 
     const getMovieList = async () => {
-        const response = await movieRepository.getAll();
+        const response = await movieRepository.getAll(authToken);
         const result = await response.json();
         setMovies(result);
     };

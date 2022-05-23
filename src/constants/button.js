@@ -7,4 +7,5 @@ export const BUTTON_TEXT = {
     GET_MORE_CONTENT: 'Get More Content',
     WATCH: 'Watch ▶',
     GET_STARTED: 'Get started',
+    FELIX_HOME: 'Felix Home',
 };

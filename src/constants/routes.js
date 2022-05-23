@@ -1,9 +1,10 @@
 import React from 'react';
+import { ROUTE_NAMES } from './routeNames';
 import Landing from '../pages/Landing/Landing';
 import NotFound from '../pages/NotFound/NotFound';
 import Login from '../pages/Login/Login';
 import SingleMovie from '../pages/SingleMovie/SingleMovie';
-import { ROUTE_NAMES } from './routeNames';
+import UserLanding from '../pages/UserLanding/UserLanding';
 
 export const ROUTES = [
     {
@@ -24,6 +25,11 @@ export const ROUTES = [
     {
         path: ROUTE_NAMES.SINGLE_MOVIE,
         component: <SingleMovie />,
+        exact: true,
+    },
+    {
+        path: ROUTE_NAMES.MOVIES,
+        component: <UserLanding />,
         exact: false,
     },
 ];

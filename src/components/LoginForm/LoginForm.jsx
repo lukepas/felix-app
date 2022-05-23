@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BUTTON_TEXT } from '../../constants/button';
 import { ROUTE_REDERECT } from '../../constants/routeNames';
+import localStorageItems from '../../constants/localStorageItems';
 import movieRepository from '../../repositories/movie';
 import Button from '../Button/Button';
 
@@ -11,16 +12,25 @@ export default function LoginForm() {
         password: '',
     });
     const [error, setError] = useState(false);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { value, name } = e.target;
         setUserData({ ...userData, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = movieRepository.loginUser(userData);
+        const response = await movieRepository.loginUser(userData);
+
         if (!response.ok) setError(true);
+
+        if (response.ok) {
+            setError(false);
+            const result = await response.json();
+            localStorage.setItem(localStorageItems.authToken, result.token);
+            navigate(ROUTE_REDERECT.MOVIES);
+        }
     };
 
     return (
@@ -49,7 +59,7 @@ export default function LoginForm() {
                         onChange={handleChange}
                     />
                 </div>
-                {error && <p className="text-red-700">You&apos;ve entered wrong email or password</p>}
+                {error && <p className="text-red-700">You&apos;ve entered incorrect email or password</p>}
                 <div className="text-center my-4">
                     <Button
                         text={BUTTON_TEXT.LOGIN}

@@ -1,19 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { BUTTON_TEXT } from '../../constants/button';
+import movieRepository from '../../repositories/movie';
 import Button from '../Button/Button';
 
 export default function Movie() {
-    const movie = {
-        title: 'Avengers: Endgame',
-        image: 'https://image.tmdb.org/t/p/original/9lFKBtaVIhP7E2Pk0IY1CwTKTMZ.jpg',
-        description: "After the devastating events of Avengers: Infinity War, the universe is in ruins due to the efforts of the Mad Titan, Thanos. With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos' actions and restore order to the universe once and for all, no matter what consequences may be in store.",
-        id: 'cbcd32-Avengers:-4f12eb',
-        video: 'https://www.youtube.com/embed/TcMBFSGVi1c',
-        free: true,
+    const [movie, setMovie] = useState({});
+    const { id } = useParams();
+
+    const getMovie = async () => {
+        const response = await movieRepository.getById(id);
+        const result = await response.json();
+        setMovie(result);
     };
 
+    useEffect(() => {
+        getMovie();
+    }, []);
+
     return (
-        <section className="flex flex-col justify-center items-center min-h-screen md:flex-row">
+        <section className="flex flex-col justify-center items-center min-h-[80vh] md:flex-row">
             <div className="h-96">
                 <img
                     src={movie.image}

@@ -1,42 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
 import MovieCard from '../MovieCard/MovieCard';
 import movieRepository from '../../repositories/movie';
+import textServices from '../../services/text';
 import { BUTTON_TEXT } from '../../constants/button';
-import { ROUTE_REDERECT } from '../../constants/routeNames';
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 export default function MovieList() {
     const [movies, setMovies] = useState([]);
-    const [isLoading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
-    const navigate = useNavigate();
 
-    if (isLoading) {
-        return (
-            <div className="min-h-[50vh] flex items-center justify-center">
-                <LoadingSpinner />
-            </div>
-        );
-    }
-
-    const getMovieList = () => {
-        try {
-            const response = movieRepository.getAll;
-            setMovies(response);
-        } catch (err) {
-            if (!err.ok) {
-                setError(true);
-            }
-        } finally {
-            setLoading(false);
-        }
+    const getMovieList = async () => {
+        const response = await movieRepository.getAll();
+        const result = await response.json();
+        setMovies(result);
     };
-
-    if (error) {
-        navigate(ROUTE_REDERECT.LOGIN);
-    }
 
     useEffect(() => {
         getMovieList();
@@ -50,7 +26,7 @@ export default function MovieList() {
                         key={movie.title}
                         title={movie.title}
                         image={movie.image}
-                        description={movie.description}
+                        description={textServices.slicedDescription(movie.description)}
                         id={movie.id}
                     />
                 ))}

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { slicedDescription } from '../../services/text';
+import textServices from '../../services/text';
 import Button from '../Button/Button';
 import { BUTTON_TEXT } from '../../constants/button';
 import { ROUTE_REDERECT } from '../../constants/routeNames';
@@ -23,7 +23,7 @@ export default function MovieCard({
             <div>
                 <Link to={`${ROUTE_REDERECT.SINGLE_MOVIE}${id}`}>
                     <h4 className="text-white text-center font-medium text-xl my-2">{title}</h4>
-                    <p className="text-white mx-2 text-center text-sm">{slicedDescription(description)}</p>
+                    <p className="text-white mx-2 text-center text-sm">{textServices.slicedDescription(description)}</p>
                 </Link>
             </div>
             <div className="text-center my-4">

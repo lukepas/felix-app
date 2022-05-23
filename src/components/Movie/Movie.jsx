@@ -7,6 +7,7 @@ import Button from '../Button/Button';
 
 export default function Movie() {
     const [movie, setMovie] = useState({});
+    const [watchMovie, setWatchMovie] = useState(false);
     const authToken = localStorage.getItem(localStorageItems.authToken);
     const { id } = useParams();
 
@@ -21,7 +22,7 @@ export default function Movie() {
     }, []);
 
     return (
-        <section className="flex flex-col justify-center items-center min-h-[80vh] md:flex-row">
+        <section className="flex flex-col justify-center items-center min-h-[80vh] md:flex-row relative">
             <div className="h-[390px] md:h-[500px]">
                 <img
                     src={movie.image}
@@ -37,10 +38,26 @@ export default function Movie() {
                         <Button text={BUTTON_TEXT.ADD_TO_FAVORTIES} />
                     </div>
                     <div className="text-center m-4">
-                        <Button text={BUTTON_TEXT.WATCH} />
+                        <Button
+                            text={BUTTON_TEXT.WATCH}
+                            onClick={() => setWatchMovie(!watchMovie)}
+                        />
                     </div>
                 </div>
             </div>
+            {watchMovie && <div
+                className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] min-h-full bg-black-rgba flex flex-col justify-center items-center "
+                aria-hidden="true"
+                onClick={() => setWatchMovie(!watchMovie)}
+            >
+                <iframe
+                    className="w-[100vw] md:w-[80vw] h-[50vh]"
+                    title={movie.title}
+                    src={movie.video}
+                    frameBorder="0"
+                    allowFullScreen
+                />
+            </div>}
         </section>
     );
 }

@@ -1,10 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
 import { BUTTON_TEXT } from '../../constants/button';
+import localStorageItems from '../../constants/localStorageItems';
 import { ROUTE_REDERECT } from '../../constants/routeNames';
+import userServices from '../../services/user';
 
 export default function Header() {
+    const navigate = useNavigate();
+    const isUserLoggedIn = userServices.isLoggedIn();
+
+    const handleClick = () => {
+        if (isUserLoggedIn) {
+            localStorage.removeItem(localStorageItems.authToken);
+            return navigate(ROUTE_REDERECT.DEFAULT);
+        }
+        return navigate(ROUTE_REDERECT.LOGIN);
+    };
+
     return (
         <header className="flex justify-between bg-black items-center min-h-[10vh]">
             <div className="m-4">
@@ -13,9 +26,10 @@ export default function Header() {
                 </Link>
             </div>
             <div className="m-4">
-                <Link to={ROUTE_REDERECT.LOGIN}>
-                    <Button text={BUTTON_TEXT.LOGIN} />
-                </Link>
+                <Button
+                    text={isUserLoggedIn ? BUTTON_TEXT.LOGOUT : BUTTON_TEXT.LOGIN}
+                    onClick={handleClick}
+                />
             </div>
         </header>
     );

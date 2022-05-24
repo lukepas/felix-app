@@ -26,6 +26,7 @@ module.exports = {
         radix: 0,
         'no-return-await': 0,
         'no-plusplus': 0,
+        'no-param-reassign': 0,
         'react/jsx-indent': 0,
         'react/jsx-indent-props': 0,
         'react/jsx-wrap-multilines': 0,

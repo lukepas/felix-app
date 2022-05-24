@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { addToFavorites, removeFromFavorites } from '../../storage/movie';
 import { BUTTON_TEXT } from '../../constants/button';
+import movieServices from '../../services/movie';
 import localStorageItems from '../../constants/localStorageItems';
 import movieRepository from '../../repositories/movie';
 import Button from '../Button/Button';
@@ -10,8 +13,13 @@ export default function Movie() {
     const [movie, setMovie] = useState({});
     const [watchMovie, setWatchMovie] = useState(false);
     const authToken = localStorage.getItem(localStorageItems.authToken);
-    const navigate = useNavigate();
     const { id } = useParams();
+    const { list } = useSelector((state) => state.movie);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const isFavorite = movieServices.isMovieFavorite(list, id);
+
+    console.log(isFavorite);
 
     const getMovie = async () => {
         const response = await movieRepository.getById(id, authToken);
@@ -40,7 +48,12 @@ export default function Movie() {
                 <p className="text-white m-4 text-left">{movie.description}</p>
                 <div className="lg:flex lg:justify-center lg:items-center">
                     <div className="text-center m-4">
-                        <Button text={BUTTON_TEXT.ADD_TO_FAVORTIES} />
+                        <Button
+                            onClick={() => (isFavorite ? dispatch(removeFromFavorites(id))
+                                : dispatch(addToFavorites(id)))}
+                            text={isFavorite ? BUTTON_TEXT.REMOVE_FROM_FAVORITES
+                                : BUTTON_TEXT.ADD_TO_FAVORTIES}
+                        />
                     </div>
                     <div className="text-center m-4">
                         <Button

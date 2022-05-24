@@ -19,8 +19,6 @@ export default function Movie() {
     const navigate = useNavigate();
     const isFavorite = movieServices.isMovieFavorite(list, id);
 
-    console.log(isFavorite);
-
     const getMovie = async () => {
         const response = await movieRepository.getById(id, authToken);
         if (response.ok) {

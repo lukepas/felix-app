@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { BUTTON_TEXT } from '../../constants/button';
 import localStorageItems from '../../constants/localStorageItems';
 import movieRepository from '../../repositories/movie';
 import Button from '../Button/Button';
+import { ROUTE_REDERECT } from '../../constants/routeNames';
 
 export default function Movie() {
     const [movie, setMovie] = useState({});
     const [watchMovie, setWatchMovie] = useState(false);
     const authToken = localStorage.getItem(localStorageItems.authToken);
+    const navigate = useNavigate();
     const { id } = useParams();
 
     const getMovie = async () => {
         const response = await movieRepository.getById(id, authToken);
-        const result = await response.json();
-        setMovie(result);
+        if (response.ok) {
+            const result = await response.json();
+            return setMovie(result);
+        }
+        return navigate(ROUTE_REDERECT.NOT_FOUND);
     };
 
     useEffect(() => {

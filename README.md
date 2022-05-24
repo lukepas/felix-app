@@ -2,6 +2,10 @@
 
 This project (Netflix clone app) was created as a practise with React, Tailwind and Redux.
 
+Test user account
+ id: tester
+ password: netflix
+
 ## `npm start`
 
 Runs the app in the development mode.\
